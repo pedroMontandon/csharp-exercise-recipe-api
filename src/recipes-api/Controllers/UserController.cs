@@ -50,10 +50,19 @@ public class UserController : ControllerBase
         }
     }
 
-    // 9 - Sua aplicação deve ter o endpoint DEL /user
     [HttpDelete("{email}")]
     public IActionResult Delete(string email)
     {
-        throw new NotImplementedException();
+        try 
+        {
+        var userToDelete = this._service.GetUser(email);
+        if (userToDelete == null) return NotFound("User not found");
+        this._service.DeleteUser(email);
+        return NoContent();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     } 
 }
