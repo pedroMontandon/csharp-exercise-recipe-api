@@ -28,12 +28,11 @@ public class RecipesController : ControllerBase
         return Ok(recipes);
     }
 
-    // 2 - Sua aplicação deve ter o endpoint GET /recipe/:name
-    //Read
     [HttpGet("{name}", Name = "GetRecipe")]
     public IActionResult Get(string name)
     {                
-        throw new NotImplementedException();
+        var recipe = this._service.GetRecipe(name);
+        return recipe != null ? Ok(recipe) : NotFound("Recipe not found");
     }
 
     // 3 - Sua aplicação deve ter o endpoint POST /recipe
