@@ -27,11 +27,11 @@ public class UserController : ControllerBase
         return user != null ? Ok(user) : NotFound("User not found");
     }
 
-    // 7 - Sua aplicação deve ter o endpoint POST /user
     [HttpPost]
     public IActionResult Create([FromBody]User user)
     {
-        throw new NotImplementedException();
+        this._service.AddUser(user);
+        return CreatedAtRoute("GetUser", new { email = user.Email }, user);
     }
 
     // "8 - Sua aplicação deve ter o endpoint PUT /user
