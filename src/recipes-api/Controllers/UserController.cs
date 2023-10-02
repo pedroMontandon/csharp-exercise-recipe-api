@@ -20,11 +20,11 @@ public class UserController : ControllerBase
         this._service = service;        
     }
 
-    // 6 - Sua aplicação deve ter o endpoint GET /user/:email
     [HttpGet("{email}", Name = "GetUser")]
     public IActionResult Get(string email)
     {                
-        throw new NotImplementedException();
+        var user = this._service.GetUser(email);
+        return user != null ? Ok(user) : NotFound("User not found");
     }
 
     // 7 - Sua aplicação deve ter o endpoint POST /user
